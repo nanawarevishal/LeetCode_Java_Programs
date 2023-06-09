@@ -1,5 +1,4 @@
 
-
 /*
  151. Reverse Words in a String
         Medium
@@ -31,25 +30,44 @@
 
  */
 
-
 package Strings.Medium;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Stack;
 
 public class reverse_words_In_Strings {
 
     static String reverseWords(String s) {
-       
-        String str = s.trim();
 
-        String str1[] = str.split(" ");
-        String str2[] = new String[str1.length];
-        for(int i=str1.length-1;i>=0;i--){
-            str2[str1.length-1-i]=str1[i];
+        String str[] = s.split(" ");
+
+        Stack<String>st = new Stack<>();
+
+        for(String x:str){
+            st.push(x);
         }
-    return Arrays.toString(str2);
-        // return str3;
+        Iterator value = st.iterator();
+
+
+        String ans = "";
+        while (value.hasNext())
+        {   
+            String str1 = (String)value.next();
+            str1.trim();
+
+            if(str1!=" ")
+            {
+                ans += st.peek() + " ";
+
+            }
+            st.pop();
+        }
+        ans += st.peek();
+
+        return ans;
     }
+
     public static void main(String[] args) {
         String str = "a good   example";
 
