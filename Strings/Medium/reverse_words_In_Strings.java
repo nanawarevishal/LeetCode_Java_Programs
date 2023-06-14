@@ -40,30 +40,29 @@ public class reverse_words_In_Strings {
 
     static String reverseWords(String s) {
 
-        String str[] = s.split(" ");
-
-        Stack<String>st = new Stack<>();
-
-        for(String x:str){
-            st.push(x);
-        }
-        Iterator value = st.iterator();
-
-
-        String ans = "";
-        while (value.hasNext())
-        {   
-            String str1 = (String)value.next();
-            str1.trim();
-
-            if(str1!=" ")
-            {
-                ans += st.peek() + " ";
-
-            }
-            st.pop();
-        }
-        ans += st.peek();
+        s += " ";
+	Stack<String> st = new Stack<String>();
+	int i;
+	String str = "";
+	for (i = 0;i < s.length();i++)
+	{
+		if (s.charAt(i) == ' ')
+		{
+			st.push(str);
+			str = "";
+		}
+		else
+		{
+			str += s.charAt(i);
+		}
+	}
+	String ans = "";
+	while (st.size() != 1)
+	{
+		ans += st.peek() +" ";
+		st.pop();
+	}
+	ans += st.peek(); 
 
         return ans;
     }
