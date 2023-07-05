@@ -34,6 +34,7 @@ public class Multiply_Strings {
 
         return Long.toString(a);
     }
+    
     public static void main(String[] args) {
         String n1 = "123";
         String n2 = "456";
