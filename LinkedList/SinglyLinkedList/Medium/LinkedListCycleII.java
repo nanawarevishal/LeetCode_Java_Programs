@@ -43,6 +43,7 @@ import java.util.Hashtable;
 class ListNode{
     int data;
     ListNode next;
+    public String val;
 
     ListNode(int x){
         data = x;

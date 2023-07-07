@@ -32,45 +32,74 @@
 
 package Strings.Medium;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Stack;
 
 public class reverse_words_In_Strings {
 
-    static String reverseWords(String s) {
-
+    static String reverseWordsBruteForce(String s) {
         s += " ";
-	Stack<String> st = new Stack<String>();
-	int i;
-	String str = "";
-	for (i = 0;i < s.length();i++)
-	{
-		if (s.charAt(i) == ' ')
-		{
-			st.push(str);
-			str = "";
-		}
-		else
-		{
-			str += s.charAt(i);
-		}
-	}
-	String ans = "";
-	while (st.size() != 1)
-	{
-		ans += st.peek() +" ";
-		st.pop();
-	}
-	ans += st.peek(); 
+        s = s.replaceAll("\s+", " ");
+        s = s.replaceAll("\\s+$", "");
+        s = s.replaceAll("^\\s+", "");
+        Stack<String> st = new Stack<String>();
+        int i;
+        String str = "";
+        for (i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ' ') {
+                st.push(str);
+                str = "";
+                
+            } else {
+                str += s.charAt(i);
+
+            }
+        }
+        String ans = "";
+        while (st.size() != 1) {
+            ans += st.peek() + " ";
+            st.pop();
+        }
+        ans += st.peek();
 
         return ans;
     }
 
-    public static void main(String[] args) {
-        String str = "a good   example";
 
-        System.out.println(reverseWords(str));
+    static String reverseWordsBetter(String s){
+
+        if(s.length()==0){
+            return s;
+        }
+
+        s = s.replaceAll("\s+", " ");
+        s = s.replaceAll("\\s+$", "");
+        s = s.replaceAll("^\\s+", "");
+        String str[] = s.split("\\s");
+
+        Stack<String>st = new Stack<>();
+        for(int i=0;i<str.length;i++){
+            st.push(str[i]);
+        }
+
+        String str2 ="";
+        while(st.size()!=1){
+            str2  += st.peek()+" ";
+            st.pop();
+        }
+
+        str2 +=st.peek();
+        return str2;
+    }
+
+  
+
+
+    public static void main(String[] args) {
+        String str = "  hello world  ";
+
+        // System.out.println(reverseWords(str));
+
+        System.out.println(reverseWordsBetter(str));
 
     }
 }
