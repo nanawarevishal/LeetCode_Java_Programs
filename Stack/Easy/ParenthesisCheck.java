@@ -67,6 +67,7 @@ public class ParenthesisCheck {
         return st.isEmpty();
     }
 
+    
     public static void main(String[] args) {
 
         String s = "()[]{}";
