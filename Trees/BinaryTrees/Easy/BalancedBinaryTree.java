@@ -29,7 +29,6 @@
 
 package Trees.BinaryTrees.Easy;
 
-import javax.print.FlavorException;
 
 class TreeNode {
       int val;
