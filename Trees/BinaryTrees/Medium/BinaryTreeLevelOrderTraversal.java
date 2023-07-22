@@ -70,8 +70,8 @@ public class BinaryTreeLevelOrderTraversal {
 				}
 				subls.add(queue.poll().val);
 			}
-			ls.add(subls);
 
+			ls.add(subls);
 		}
 
 		return ls;

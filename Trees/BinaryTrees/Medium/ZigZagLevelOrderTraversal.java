@@ -29,13 +29,10 @@
 
 package Trees.BinaryTrees.Medium;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import javax.management.QueryEval;
-import javax.print.attribute.Size2DSyntax;
 
 class TreeNode {
       int val;
@@ -53,42 +50,45 @@ class TreeNode {
 public class ZigZagLevelOrderTraversal {
 
     static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>>ls = new ArrayList<>();
-        if(root == null){
-            return ls;
-        }
+        List<List<Integer>>ls = new LinkedList<>();
+		Queue<TreeNode>queue = new LinkedList<>();
+		if(root==null){
+			return ls;
+		}
 
-        Queue<TreeNode>queue = new LinkedList<>();
+		queue.offer(root);
+        int height = 1;
+		while(!queue.isEmpty()){
+			int queueSize = queue.size();
+			List<Integer>subls = new LinkedList<>();
+			List<Integer>subls1 = new LinkedList<>();
 
-        queue.offer(root);
+			for(int i=0;i<queueSize;i++){
+				if(queue.peek().left!=null){
+					queue.offer(queue.peek().left);
+				}
 
-        boolean flag = true;
-        while(!queue.isEmpty()){
-            int queueSize = queue.size();
-            List<Integer>subLs = new ArrayList<Integer>(queueSize);
-            for(int i=0;i<queueSize;i++){
+				if(queue.peek().right!=null){
+					queue.offer(queue.peek().right);
+				}
+				subls.add(queue.poll().val);
+                
 
-               TreeNode root1 = queue.peek();
-                queue.poll();
-
-                int ind = (flag) ? i :(queueSize-1-i);
-
-                subLs.add(ind, root1.val);
-                    
-                if(root1.left!=null){
-                    queue.offer(root1.left);
+			}
+            if(height%2==0){
+                
+                for(int j=subls.size()-1;j>=0;j--){
+                    subls1.add(subls.get(j));
                 }
-
-                if(root1.right!=null){
-                    queue.offer(root1.right);
-                }
-
+                ls.add(subls1);
             }
-            flag = !flag;
-            ls.add(subLs);
-        }
+            else{
+                ls.add(subls);
+            }
+            height++;
+		}
 
-        return ls;
+		return ls;
     }
 
     public static void main(String[] args) {
@@ -96,7 +96,7 @@ public class ZigZagLevelOrderTraversal {
         root.left = new TreeNode(9);
         root.right = new TreeNode(20);
         root.right.left = new TreeNode(15);
-        root.left.right = new TreeNode(7);
+        root.right.right = new TreeNode(7);
 
         List<List<Integer>>ls = zigzagLevelOrder(root);
         System.out.println(ls);
