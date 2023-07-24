@@ -30,7 +30,11 @@
 package Trees.BinaryTrees.Medium;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.TreeMap;
 
 class TreeNode {
       int val;
@@ -45,41 +49,92 @@ class TreeNode {
       }
 }
 
+class Pair{
+    TreeNode node;
+    int line;
+    Pair(TreeNode _node,int _line){
+        node = _node;
+        line = _line;
+    }
+}
+
 public class RightSideViewBT {
 
-    static List<Integer> rightSideView(TreeNode root) {
+    static List<Integer> rightSideViewBruteForce(TreeNode root) {
         List<Integer>ls = new ArrayList<>();
         if(root==null){
             return ls;
         }
 
-        RightView(root, ls);
+       Map<Integer,Integer>mp = new TreeMap<>();
+       Queue<Pair>queue = new LinkedList<>();
+
+       queue.offer(new Pair(root, 0));
+
+       while(!queue.isEmpty()){
+            int queueSize = queue.size();
+            Pair temp = queue.remove();
+            int line = temp.line;
+            TreeNode node = temp.node;
+
+            mp.put(line, node.val);
+            line = line+1;
+
+            for(int i=0;i<queueSize;i++){
+                if(node.left!=null){
+                    queue.offer(new Pair(node.left, line));
+                }
+
+                if(node.right!=null){
+                    queue.offer(new Pair(node.right, line));
+                }
+            }
+       }
+
+       for(Map.Entry<Integer,Integer>entry : mp.entrySet()){
+            ls.add(entry.getValue());
+       }
 
         return ls;
     }
 
-    static void RightView(TreeNode root,List<Integer>ls){
-        ls.add(root.val);
+    static List<Integer> rightSideViewOptimal(TreeNode root){
+        List<Integer>ls = new ArrayList<>();
+        rightView(root, ls, 0);
+
+        return ls;
+
+    }
+
+    static void rightView(TreeNode root,List<Integer>ls,int level){
+        if(root == null){
+            return;
+        }
+
+        if(level == ls.size()){
+            ls.add(root.val);
+        }
+
         if(root.right!=null){
-            RightView(root.right, ls);
-
+            rightView(root.right, ls, level+1);
         }
 
-        else{
-            if(root.left!=null){
-                RightView(root.left, ls);
-            }
+        if(root.left!=null){
+            rightView(root.left, ls, level+1);
         }
+
     }
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
-        // root.right =new TreeNode(3);
+        root.right = new TreeNode(3);
+        // root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
-        // root.right.right =new TreeNode(4);
+        root.right.right =new TreeNode(4);
 
-        List<Integer>ls = rightSideView(root);
+        // List<Integer>ls = rightSideViewBruteForce(root);
+        List<Integer>ls = rightSideViewOptimal(root);
 
         System.out.println(ls);
     }
