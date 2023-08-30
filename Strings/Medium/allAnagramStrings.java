@@ -85,6 +85,6 @@ public class allAnagramStrings {
     public static void main(String[] args) {
         String s = "cbaebabacd", p = "abc";
 
-        System.out.println(findAnagramsOptimal(s, p));
+        // System.out.println(findAnagramsOptimal(s, p));
     }
 }
