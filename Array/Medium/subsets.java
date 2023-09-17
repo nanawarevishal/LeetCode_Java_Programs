@@ -33,16 +33,34 @@ public class subsets {
 
     static List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>>ls = new ArrayList<>();
+        List<Integer>al =new  ArrayList<>();
+        ls.add(new ArrayList<>());
+
         for(int i=0;i<nums.length;i++){
             List<Integer>subls = new ArrayList<>();
-            for(int j=i;j<nums.length;i++){
+            subls.add(nums[i]);
+            ls.add(new ArrayList<>(subls));
+            for(int j=i+1;j<nums.length;j++){
+                subls.add(nums[j]);
                 
+                ls.add(new ArrayList<>(subls));
+                subls.remove(1);
             }
+            al.add(nums[i]);
         }
+
+        if(nums.length==1 || nums.length==2){
+            return ls;
+        }
+
+        ls.add(al);
 
         return ls;
     }
+
     public static void main(String[] args) {
-        
+        int[] nums = {1,2,3};
+
+        System.out.println(subsets(nums));
     }
 }
