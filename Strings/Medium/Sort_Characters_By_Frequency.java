@@ -104,6 +104,7 @@ public class Sort_Characters_By_Frequency {
 
         return str;
     }
+    
     public static void main(String[] args) {
         String s = "cccaaa";
 
