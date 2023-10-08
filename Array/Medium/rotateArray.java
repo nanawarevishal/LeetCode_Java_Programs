@@ -42,7 +42,7 @@ public class rotateArray {
             return;
         }
         k = k%nums.length;
-        int temp[] = new int[k+1];
+        int temp[] = new int[nums.length-k];
 
         for(int i=0;i<nums.length-k;i++){
             temp[i] = nums[i];
