@@ -1,21 +1,26 @@
 package LinkedList.SinglyLinkedList.Medium;
 
+import javax.xml.transform.Templates;
+
+import Strings.Easy.numberOfSeniorCitizen;
+
 class ListNode{
-    int val;
+    int data;
     ListNode next;
+    public String val;
 
     ListNode(int x){
-        val = x;
+        data = x;
         next = null;
     }
 }
 
-class MergeSortedList {
+class SwapNodesPair {
 
-    static ListNode insert(ListNode head,int val){
+    static ListNode insert(ListNode head,int data){
 
         ListNode node = head;
-        ListNode newnode = new ListNode(val);
+        ListNode newnode = new ListNode(data);
         if(head==null){
             head = newnode;
             newnode.next=null;
@@ -41,7 +46,7 @@ class MergeSortedList {
 
         else{
             while(node!=null){
-                System.out.print(node.val+"-->");
+                System.out.print(node.data+"-->");
                 node = node.next;
             }
         }
@@ -49,17 +54,28 @@ class MergeSortedList {
 
     static ListNode swapPairs(ListNode head) {
 
-        if(head!=null){
+        ListNode node = head;
+        ListNode prev = null;
+        while(node.next!=null){
             
-            ListNode node = head;
-            while(node!=null){
-
-                ListNode temp = node.next.next;
-                node.next.next = node;
-                node = temp;
+            ListNode temp = node.next;
+            if(prev==null){
+                head = node;
             }
+            if(prev!=null){
+                node.next = prev;
+                prev.next = temp;
+                System.out.println(node.next.data);
+                System.out.println(prev.data);
+                System.out.println(temp.data);
+                // break;
+            }
+
+            prev = node;
+            node =temp;
         }
-        return head;
+
+      return head;
     }
 
    
@@ -70,11 +86,12 @@ class MergeSortedList {
         head1 = insert(head1, 1);
         head1 = insert(head1, 2);
         head1 = insert(head1, 3);
-        head1 = insert(head1, 4);
+        // display(head1);
 
-        ListNode head = swapPairs(head1);
-        display(head);
+        ListNode n1 = swapPairs(head1);
 
+        display(n1);
     }
 }
+
 
