@@ -31,36 +31,43 @@ import java.util.List;
 
 public class subsets {
 
-    static List<List<Integer>> subsets(int[] nums) {
+    static List<List<Integer>> subset(int[] nums) {
         List<List<Integer>>ls = new ArrayList<>();
-        List<Integer>al =new  ArrayList<>();
         ls.add(new ArrayList<>());
-
+        List<Integer>ls1 = new ArrayList<>();
+        
         for(int i=0;i<nums.length;i++){
-            List<Integer>subls = new ArrayList<>();
-            subls.add(nums[i]);
-            ls.add(new ArrayList<>(subls));
-            for(int j=i+1;j<nums.length;j++){
-                subls.add(nums[j]);
-                
-                ls.add(new ArrayList<>(subls));
-                subls.remove(1);
+            
+            int left = i;
+            int right = i;
+            while(right<nums.length){
+                List<Integer>al =new  ArrayList<>();
+
+                if(left<right){
+                    al.add(nums[left]);
+                    al.add(nums[right]);
+                }
+
+                else{
+                    al.add(nums[right]);
+                }
+                right++;
+                ls.add(al);
             }
-            al.add(nums[i]);
+            ls1.add(nums[i]);
         }
+        // System.out.println(ls);
+        if(nums.length>1){
 
-        if(nums.length==1 || nums.length==2){
-            return ls;
+            ls.add(ls1);
         }
-
-        ls.add(al);
 
         return ls;
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,2,3};
+        int[] nums = {3,2,4,1};
 
-        System.out.println(subsets(nums));
+        System.out.println(subset(nums));
     }
 }
