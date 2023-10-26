@@ -39,23 +39,25 @@ import java.util.List;
 
 public class allAnagramStrings {
 
-    static  List<Integer> findAnagrams(String s, String p) {
-        
+    static List<Integer> findAnagrams(String s, String p) {
+
         List<Integer>ls = new ArrayList<>();
-        String freqStringp = getFrequencyString(p);
 
-        for(int i=0;i<s.length()-p.length()+1;i++){
-            String str = "";
-            str +=s.charAt(i);
-            for(int j=i+1;j<p.length()+i;j++){
-                str+=s.charAt(j);
+        String st = getFrequencyString(p);
+
+        int start = 0;
+        int end = p.length()-1;
+
+        while(end<s.length()){
+
+            String str = s.substring(start,end+1);
+            
+            if(getFrequencyString(str).equals(st)){
+                ls.add(start);
             }
 
-            String freqString = getFrequencyString(str);
-
-            if(freqString.equals(freqStringp)){
-                ls.add(i);
-            }
+            start++;
+            end++;
         }
 
         return ls;
@@ -83,8 +85,9 @@ public class allAnagramStrings {
       }
 
     public static void main(String[] args) {
-        String s = "cbaebabacd", p = "abc";
 
-        // System.out.println(findAnagramsOptimal(s, p));
+        String s = "cbaebabacd", p = "abc";
+        System.out.println(findAnagrams(s, p));
+        
     }
 }
