@@ -58,7 +58,9 @@ public class GroupAnagram {
                 strList.add(str);
                 frequencyStringsMap.put(frequencyString, strList);
             }
-        }   
+        }
+        
+        System.out.println(frequencyStringsMap);
 
         return new ArrayList<>(frequencyStringsMap.values());
     }
