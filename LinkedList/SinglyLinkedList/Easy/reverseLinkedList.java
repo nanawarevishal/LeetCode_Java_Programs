@@ -88,8 +88,10 @@ public class reverseLinkedList {
         if(head==null){
             return head;
         }
+        
         ListNode node = head;
         ListNode prev = null;
+
         while(node.next!=null){
             ListNode temp = node.next;
             node.next = prev;
