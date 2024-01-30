@@ -1,7 +1,7 @@
 
 /*
 
- 20. Valid Parentheses
+20. Valid Parentheses
         Easy
         20.6K
         1.3K
